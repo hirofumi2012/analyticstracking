@@ -1,46 +1,60 @@
 <?php
 /*
 Plugin Name: Analytics Tracking
-Version: 2.1
-Author: Hirofumi Kuroiwa
+Plugin URI: https://github.com/hirofumi2012/analyticstracking
+Description: Add the tracking code snippet to each web page.
+Version: 2.2
+Author: hirofumi2012
+Author URI: https://four-dimensional-friend.appspot.com/
+License: GPLv2 or later
 */
-
-/**
- * Add options page
- */
-function add_plugin_page() {
-	add_options_page( 'Google Analytics', 'Google Analytics', 'manage_options', 'analytics', 'create_options_page' );
-}
-
-/**
- * Options page callback
- */
-function create_options_page() {
-	if ( !current_user_can( 'manage_options' ) )  {
-		wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
-	}
-	echo '<div class="wrap">';
-	echo '<h2>Google Analytics</h2>';
-	echo '<form method="post" action="options.php">';
-	settings_fields( 'google-analytics' );
-	do_settings_sections( 'google-analytics' );
-	submit_button();
-	echo '</form>';
-	echo '</div>';
-}
 
 /**
  * Register and add settings
  */
 function page_init() {
 	register_setting(
-		'google-analytics', // Option group
+		'general', // Option group
 		'ga_id', // Option name
 		'esc_js' // Sanitize
 	);
+	
+	add_settings_section(
+		'google-analytics', // ID
+		'Google Analytics', // Title
+		'print_section_info', // Callback
+		'general' // Page
+	);
+	
+	add_settings_field(
+		'ga_id', // ID
+		'Tracking ID', // Title
+		'id_input', // Callback
+		'general', // Page
+		'google-analytics' // Section
+	);
 }
 
-add_action( 'admin_menu', 'add_plugin_page' );
+/**
+ * Print the Section text
+ */
+function print_section_info()
+{
+	echo 'Enter your Analytics tracking ID:';
+}
+
+/**
+ * Get the settings option and print its values
+ */
+function id_input()
+{
+	$ga_id = get_option( 'ga_id', '' );
+	printf(
+		'<input type="text" id="ga_id" name="ga_id" value="%s" />',
+		esc_attr( $ga_id )
+	);
+}
+    
 add_action( 'admin_init', 'page_init' );
 
 /**
