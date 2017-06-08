@@ -3,7 +3,7 @@
 Plugin Name: Analytics Tracking
 Plugin URI: https://github.com/hirofumi2012/analyticstracking
 Description: Add the tracking code snippet to each web page.
-Version: 2.2
+Version: 2.3
 Author: hirofumi2012
 Author URI: https://four-dimensional-friend.appspot.com/
 License: GPLv2 or later
@@ -71,7 +71,7 @@ function tracking_code_display() {
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
-  ga('create', '<?php esc_js( $ga_id ); ?>', 'auto');
+  ga('create', '<?php echo esc_js( $ga_id ); ?>', 'auto');
   ga('send', 'pageview');
 
 </script>
