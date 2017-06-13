@@ -3,7 +3,7 @@
 Plugin Name: Analytics Tracking
 Plugin URI: https://github.com/hirofumi2012/analyticstracking
 Description: Add the tracking code snippet to each web page.
-Version: 2.4
+Version: 2.5
 Author: hirofumi2012
 Author URI: https://four-dimensional-friend.appspot.com/
 License: GPLv2 or later
@@ -12,7 +12,7 @@ License: GPLv2 or later
 /**
  * Register and add settings
  */
-function page_init() {
+function ga_page_init() {
 	register_setting(
 		'general', // Option group
 		'ga_id', // Option name
@@ -22,14 +22,14 @@ function page_init() {
 	add_settings_section(
 		'google-analytics', // ID
 		'Google Analytics', // Title
-		'print_section_info', // Callback
+		'ga_print_section_info', // Callback
 		'general' // Page
 	);
 	
 	add_settings_field(
 		'ga_id', // ID
 		'Tracking ID', // Title
-		'id_input', // Callback
+		'ga_id_input', // Callback
 		'general', // Page
 		'google-analytics' // Section
 	);
@@ -38,7 +38,7 @@ function page_init() {
 /**
  * Print the Section text
  */
-function print_section_info()
+function ga_print_section_info()
 {
 	echo 'Enter your Analytics tracking ID:';
 }
@@ -46,7 +46,7 @@ function print_section_info()
 /**
  * Get the settings option and print its values
  */
-function id_input()
+function ga_id_input()
 {
 	$ga_id = get_option( 'ga_id', '' );
 	printf(
@@ -55,13 +55,13 @@ function id_input()
 	);
 }
     
-add_action( 'admin_init', 'page_init' );
+add_action( 'admin_init', 'ga_page_init' );
 
 /**
  * Display the tracking codes
  * Acts as a controller to figure out which code to display
  */
-function tracking_code_display() {
+function ga_tracking_code_display() {
 	$ga_id = get_option( 'ga_id' );
 	if ( $ga_id ) {
 ?>
@@ -79,4 +79,4 @@ function tracking_code_display() {
 	}
 }
 
-add_action( 'wp_head', 'tracking_code_display', 999999 );
+add_action( 'wp_head', 'ga_tracking_code_display', 999999 );
