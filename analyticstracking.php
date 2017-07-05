@@ -3,7 +3,7 @@
 Plugin Name: Analytics Tracking
 Plugin URI: https://github.com/hirofumi2012/analyticstracking
 Description: Add the tracking code snippet to each web page.
-Version: 2.5
+Version: 2.6
 Author: hirofumi2012
 Author URI: https://four-dimensional-friend.appspot.com/
 License: GPLv2 or later
@@ -80,3 +80,12 @@ function ga_tracking_code_display() {
 }
 
 add_action( 'wp_head', 'ga_tracking_code_display', 999999 );
+
+function ga_uninstall_hook()
+{
+    delete_option( 'ga_id' );
+}
+
+if ( function_exists( 'register_uninstall_hook' ) ) {
+    register_uninstall_hook( __FILE__, 'ga_uninstall_hook' );
+}
