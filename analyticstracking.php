@@ -81,11 +81,14 @@ function ga_tracking_code_display() {
 
 add_action( 'wp_head', 'ga_tracking_code_display', 999999 );
 
-function ga_uninstall_hook()
+/**
+ * Delete setting
+ */
+function ga_uninstall()
 {
     delete_option( 'ga_id' );
 }
 
 if ( function_exists( 'register_uninstall_hook' ) ) {
-    register_uninstall_hook( __FILE__, 'ga_uninstall_hook' );
+    register_uninstall_hook( __FILE__, 'ga_uninstall' );
 }
