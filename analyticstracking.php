@@ -21,14 +21,14 @@ function ga_page_init() {
 	
 	add_settings_section(
 		'google-analytics', // ID
-		'Google Analytics', // Title
+		__( 'Google Analytics' ), // Title
 		'ga_print_section_info', // Callback
 		'general' // Page
 	);
 	
 	add_settings_field(
 		'ga_id', // ID
-		'Tracking ID', // Title
+		__( 'Tracking ID' ), // Title
 		'ga_id_input', // Callback
 		'general', // Page
 		'google-analytics' // Section
@@ -40,7 +40,7 @@ function ga_page_init() {
  */
 function ga_print_section_info()
 {
-	echo 'Enter your Analytics tracking ID:';
+	_e( 'Enter your Analytics tracking ID:' );
 }
 
 /**
