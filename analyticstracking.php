@@ -7,6 +7,7 @@ Version: 2.6
 Author: hirofumi2012
 Author URI: https://four-dimensional-friend.appspot.com/
 License: GPLv2 or later
+Text Domain: analytics-tracking
 */
 
 /**
