@@ -11,6 +11,15 @@ Text Domain: analytics-tracking
 */
 
 /**
+ * Load plugin textdomain
+ */
+function ga_load_textdomain() {
+	load_plugin_textdomain( 'analytics-tracking' );
+}
+
+add_action( 'plugins_loaded', 'ga_load_textdomain' );
+
+/**
  * Register and add settings
  */
 function ga_page_init() {
@@ -22,14 +31,14 @@ function ga_page_init() {
 	
 	add_settings_section(
 		'google-analytics', // ID
-		__( 'Google Analytics' ), // Title
+		__( 'Google Analytics', 'analytics-tracking' ), // Title
 		'ga_print_section_info', // Callback
 		'general' // Page
 	);
 	
 	add_settings_field(
 		'ga_id', // ID
-		__( 'Tracking ID' ), // Title
+		__( 'Tracking ID', 'analytics-tracking' ), // Title
 		'ga_id_input', // Callback
 		'general', // Page
 		'google-analytics' // Section
@@ -41,7 +50,7 @@ function ga_page_init() {
  */
 function ga_print_section_info()
 {
-	_e( 'Enter your Analytics tracking ID:' );
+	_e( 'Enter your Analytics tracking ID:', 'analytics-tracking' );
 }
 
 /**
