@@ -5,7 +5,7 @@ Plugin URI: https://github.com/hirofumi2012/analyticstracking
 Description: Add the tracking code snippet to each web page.
 Version: 2.6
 Author: hirofumi2012
-Author URI: http://four-dimensional-friend.com
+Author URI: https://four-dimensional-friend.com
 License: GPLv2 or later
 Text Domain: analytics-tracking
 */
@@ -50,7 +50,7 @@ function ga_page_init() {
  */
 function ga_print_section_info()
 {
-	_e( 'Enter your Analytics tracking ID:', 'analytics-tracking' );
+	_e( 'Enter your Analytics tracking ID. Ex: UA-00000000-0', 'analytics-tracking' );
 }
 
 /**
@@ -64,7 +64,7 @@ function ga_id_input()
 		esc_attr( $ga_id )
 	);
 }
-    
+
 add_action( 'admin_init', 'ga_page_init' );
 
 /**
@@ -96,9 +96,9 @@ add_action( 'wp_head', 'ga_tracking_code_display', 999999 );
  */
 function ga_uninstall()
 {
-    delete_option( 'ga_id' );
+	delete_option( 'ga_id' );
 }
 
 if ( function_exists( 'register_uninstall_hook' ) ) {
-    register_uninstall_hook( __FILE__, 'ga_uninstall' );
+	register_uninstall_hook( __FILE__, 'ga_uninstall' );
 }
